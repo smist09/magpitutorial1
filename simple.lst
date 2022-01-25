@@ -1,0 +1,59 @@
+
+simple.o:     file format elf32-littlearm
+
+Contents of section .text:
+ 0000 1100a0e3 020080e2 020000eb 0170a0e3  .............p..
+ 0010 0000a0e3 000000ef 04702de5 0100a0e3  .........p-.....
+ 0020 20109fe5 0d20a0e3 0470a0e3 000000ef   .... ...p......
+ 0030 04709de4 1eff2fe1 48656c6c 6f20576f  .p..../.Hello Wo
+ 0040 726c6421 0a000000 38000000           rld!....8...    
+Contents of section .debug_line:
+ 0000 42000000 03001f00 00000201 fb0e0d00  B...............
+ 0010 01010101 00000001 00000100 73696d70  ............simp
+ 0020 6c652e73 00000000 00000502 00000000  le.s............
+ 0030 030b012f 2f2f2f2f 302f2f2f 2f2f2f2f  .../////0///////
+ 0040 99020200 0101                        ......          
+Contents of section .debug_info:
+ 0000 22000000 02000000 00000401 00000000  "...............
+ 0010 00000000 4c000000 00000000 09000000  ....L...........
+ 0020 20000000 0180                         .....          
+Contents of section .debug_abbrev:
+ 0000 01110010 06110112 01030e1b 0e250e13  .............%..
+ 0010 05000000                             ....            
+Contents of section .debug_aranges:
+ 0000 1c000000 02000000 00000400 00000000  ................
+ 0010 00000000 4c000000 00000000 00000000  ....L...........
+Contents of section .debug_str:
+ 0000 73696d70 6c652e73 002f686f 6d652f70  simple.s./home/p
+ 0010 692f6173 6d2f7475 746f7269 616c3100  i/asm/tutorial1.
+ 0020 474e5520 41532032 2e33352e 3200      GNU AS 2.35.2.  
+Contents of section .ARM.attributes:
+ 0000 41150000 00616561 62690001 0b000000  A....aeabi......
+ 0010 06020801 0901                        ......          
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	e3a00011 	mov	r0, #17
+   4:	e2800002 	add	r0, r0, #2
+   8:	eb000002 	bl	18 <prntHW>
+   c:	e3a07001 	mov	r7, #1
+  10:	e3a00000 	mov	r0, #0
+  14:	ef000000 	svc	0x00000000
+
+00000018 <prntHW>:
+  18:	e52d7004 	push	{r7}		; (str r7, [sp, #-4]!)
+  1c:	e3a00001 	mov	r0, #1
+  20:	e59f1020 	ldr	r1, [pc, #32]	; 48 <helloworld+0x10>
+  24:	e3a0200d 	mov	r2, #13
+  28:	e3a07004 	mov	r7, #4
+  2c:	ef000000 	svc	0x00000000
+  30:	e49d7004 	pop	{r7}		; (ldr r7, [sp], #4)
+  34:	e12fff1e 	bx	lr
+
+00000038 <helloworld>:
+  38:	6c6c6548 	.word	0x6c6c6548
+  3c:	6f57206f 	.word	0x6f57206f
+  40:	21646c72 	.word	0x21646c72
+  44:	0000000a 	.word	0x0000000a
+  48:	00000038 	.word	0x00000038
